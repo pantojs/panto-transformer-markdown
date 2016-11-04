@@ -5,5 +5,5 @@ sudo: false
 node_js:
   - node
 after_script:
-  - npm install -g istanbul
+  - npm install istanbul
   - npm run coveralls
