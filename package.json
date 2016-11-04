@@ -1,0 +1,41 @@
+{
+  "name": "panto-transformer-markdown",
+  "version": "0.1.0",
+  "description": "Markdown transformer for panto",
+  "main": "index.js",
+  "scripts": {
+    "test": "eslint src index.js && ./node_modules/.bin/mocha --harmony",
+    "coveralls": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
+    "prepublish": "npm run test"
+  },
+  "pre-commit": "test",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pantojs/panto-transformer-markdown.git"
+  },
+  "keywords": [
+    "panto",
+    "markdown",
+    "transformer"
+  ],
+  "engines": {
+    "node": ">=6.0.0"
+  },
+  "author": "yanni4night@gmail.com",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/pantojs/panto-transformer-markdown/issues"
+  },
+  "homepage": "https://github.com/pantojs/panto-transformer-markdown",
+  "dependencies": {
+    "markdown-it": "^8.1.0",
+    "panto-transformer": "^0.2.5"
+  },
+  "devDependencies": {
+    "panto": "0.2.0",
+    "coveralls": "^2.11.14",
+    "mocha": "^3.1.2",
+    "mocha-lcov-reporter": "^1.2.0",
+    "pre-commit": "^1.1.3"
+  }
+}
