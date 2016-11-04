@@ -18,6 +18,13 @@ class MarkdownTransformer extends Transformer {
     _transform(file) {
         return new Promise(resolve => {
             const md = MarkdownIt(this.options.markdownOptions || {});
+
+            const plugins = this.options.markdownPlugins || [];
+
+            for (let plugin of plugins) {
+                md.use(...plugin);
+            }
+
             const result = md.render(file.content);
             resolve(panto._.extend(file, {
                 content: result

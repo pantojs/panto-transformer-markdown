@@ -16,7 +16,7 @@ const MarkdownTransformer = require('../');
 
 describe('panto-transformer-markdown', () => {
     describe('#transform', () => {
-        it('should ok', done => {
+        it('should compile to html', done => {
             new MarkdownTransformer({
                 markdownOptions: {
                     html: true,
@@ -29,6 +29,26 @@ describe('panto-transformer-markdown', () => {
                 content: '# title'
             }).then(file => {
                 assert.ok(file.content.indexOf('<h1>') > -1);
+            }).then(() => done(), done);
+        });
+        it('plugins should work', done => {
+            new MarkdownTransformer({
+                markdownOptions: {
+                    html: true
+                },
+                markdownPlugins: [
+                    [require('markdown-it-sanitizer'), {
+                        imageClass: 'my-img',
+                        removeUnbalanced: false,
+                        removeUnknown: false
+                    }]
+                ]
+            }).transform({
+                filename: 'test',
+                content: '<u><img src="http://example.com/image.png" alt="image" title="example">'
+            }).then(file => {
+                assert.ok(file.content.indexOf('<u>') === -1);
+                assert.ok(file.content.indexOf('my-img') > -1);
             }).then(() => done(), done);
         });
     });

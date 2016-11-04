@@ -7,12 +7,24 @@ Markdown transformer for panto based on [markdown-it](http://npmjs.org/markdown-
 panto.loadTransformer('markdown');
 
 panto.$('**/*.md').read().markdown({
-    markdownOptions: {}
+    markdownOptions: {
+        html: true
+    },
+    markdownPlugins: [
+        [
+            require('markdown-it-sanitizer'), {
+                        imageClass: 'my-img',
+                        removeUnbalanced: false,
+                        removeUnknown: false
+            }
+        ]
+    ]
 });
 ```
 
 ## options
  - markdownOptions: Object, see <https://markdown-it.github.io/markdown-it/#MarkdownIt.new>
+ - markdownPlugins: Array, [avaliable plugins](https://www.npmjs.com/browse/keyword/markdown-it-plugin)
 
 [npm-url]: https://npmjs.org/package/panto-transformer-markdown
 [downloads-image]: http://img.shields.io/npm/dm/panto-transformer-markdown.svg
